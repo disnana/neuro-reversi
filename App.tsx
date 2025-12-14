@@ -147,7 +147,8 @@ function App() {
         const newWorkers: Worker[] = [];
         for (let i = 0; i < concurrency; i++) {
             try {
-                const worker = new Worker('./services/simulationWorker.ts', { type: 'module' });
+                // FIXED: Use new URL(..., import.meta.url) so bundlers can resolve/compile the TS worker
+                const worker = new Worker(new URL('./services/simulationWorker.ts', import.meta.url), { type: 'module' });
                 
                 worker.onmessage = (e) => handleWorkerMessage(e.data, mode, i, currentId);
                 worker.onerror = (e) => {
