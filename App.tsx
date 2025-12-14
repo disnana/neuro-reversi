@@ -498,22 +498,22 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-cyan-500/30">
       
-      <header className="p-6 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+      <header className="p-3 md:p-6 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-3">
-             <div className="w-10 h-10 bg-cyan-500 rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.5)]">
-               <span className="text-2xl">⚪</span>
+          <div className="flex items-center gap-2 md:gap-3">
+             <div className="w-8 h-8 md:w-10 md:h-10 bg-cyan-500 rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.5)]">
+               <span className="text-xl md:text-2xl">⚪</span>
              </div>
              <div>
-               <h1 className="text-2xl font-display font-bold text-white tracking-wider">NEURO<span className="text-cyan-400">REVERSI</span></h1>
-               <p className="text-xs text-slate-400 font-mono">GEN AI REINFORCEMENT LEARNING</p>
+               <h1 className="text-lg md:text-2xl font-display font-bold text-white tracking-wider">NEURO<span className="text-cyan-400">REVERSI</span></h1>
+               <p className="text-[10px] md:text-xs text-slate-400 font-mono hidden md:block">GEN AI REINFORCEMENT LEARNING</p>
              </div>
           </div>
           <div className="flex gap-4">
             {gameMode !== GameMode.IDLE && (
               <button 
                 onClick={stopGame}
-                className="px-4 py-2 rounded border border-red-500/50 text-red-400 hover:bg-red-500/10 font-bold text-sm transition-colors"
+                className="px-3 py-1 md:px-4 md:py-2 rounded border border-red-500/50 text-red-400 hover:bg-red-500/10 font-bold text-xs md:text-sm transition-colors"
               >
                 STOP
               </button>
@@ -522,11 +522,11 @@ function App() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <main className="max-w-6xl mx-auto p-3 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Panel */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
-          <div className="bg-slate-900 rounded-xl border border-slate-700 p-6 shadow-lg">
+        <div className="lg:col-span-4 flex flex-col gap-6 order-2 lg:order-1">
+          <div className="bg-slate-900 rounded-xl border border-slate-700 p-4 md:p-6 shadow-lg">
             <h2 className="text-lg font-display text-white mb-4 flex items-center gap-2">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
               AI CORE
@@ -717,23 +717,23 @@ function App() {
         </div>
 
         {/* Right Panel: Game Arena */}
-        <div className="lg:col-span-8 min-h-[600px]">
+        <div className="lg:col-span-8 min-h-[500px] md:min-h-[600px] order-1 lg:order-2">
           {isParallelView ? (
-             <div className="h-full flex flex-col bg-slate-900/20 border border-slate-800 rounded-xl relative overflow-hidden p-6">
+             <div className="h-full flex flex-col bg-slate-900/20 border border-slate-800 rounded-xl relative overflow-hidden p-4 md:p-6">
                 
                 {/* Session Header */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                    <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-700 shadow-lg flex flex-col items-center justify-center">
                       <div className="text-[10px] text-slate-500 uppercase tracking-widest">Wins</div>
-                      <div className="text-3xl font-mono font-bold text-cyan-400">{sessionStats.wins}</div>
+                      <div className="text-2xl md:text-3xl font-mono font-bold text-cyan-400">{sessionStats.wins}</div>
                    </div>
                    <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-700 shadow-lg flex flex-col items-center justify-center">
                       <div className="text-[10px] text-slate-500 uppercase tracking-widest">Losses</div>
-                      <div className="text-3xl font-mono font-bold text-fuchsia-400">{sessionStats.losses}</div>
+                      <div className="text-2xl md:text-3xl font-mono font-bold text-fuchsia-400">{sessionStats.losses}</div>
                    </div>
                    <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-700 shadow-lg flex flex-col items-center justify-center">
                       <div className="text-[10px] text-slate-500 uppercase tracking-widest">Draws</div>
-                      <div className="text-3xl font-mono font-bold text-slate-400">{sessionStats.draws}</div>
+                      <div className="text-2xl md:text-3xl font-mono font-bold text-slate-400">{sessionStats.draws}</div>
                    </div>
                 </div>
 
@@ -758,7 +758,7 @@ function App() {
                                         </div>
                                         
                                         {/* Mini Board Visualization */}
-                                        <div className="w-24 h-24 grid grid-cols-8 gap-[1px] bg-slate-800 border border-slate-800">
+                                        <div className="w-full aspect-square grid grid-cols-8 gap-[1px] bg-slate-800 border border-slate-800">
                                             {worker.board.map((row, r) => row.map((cell, c) => (
                                                 <div key={`${r}-${c}`} className={`w-full h-full ${cell === 'Black' ? 'bg-cyan-500' : cell === 'White' ? 'bg-fuchsia-500' : 'bg-slate-900'}`}></div>
                                             )))}
