@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BattleArena } from './components/BattleArena';
 import { StatChart } from './components/StatChart';
+import WasmTest from './components/WasmTest';
 import { ConfirmationModal } from './components/ConfirmationModal';
 import {
   Board, Disk, GameMode, StatPoint, Move, LearningData, WorkerOutputMessage, WorkerStatus
@@ -707,6 +708,8 @@ function App() {
 
           <StatChart data={stats} />
 
+          <WasmTest />
+
           <div className="bg-slate-900/50 p-4 rounded-lg border border-slate-800 text-xs text-slate-400 leading-relaxed">
             <p className="mb-2"><strong className="text-cyan-400">System Status:</strong></p>
             <ul className="list-disc pl-4 space-y-1 text-slate-500">
@@ -718,9 +721,15 @@ function App() {
         </div>
 
         {/* Right Panel: Game Arena */}
-        <div className="lg:col-span-8 min-h-[500px] md:min-h-[600px] order-1 lg:order-2">
+        <div className="lg:col-span-8 order-1 lg:order-2">
           {isParallelView ? (
-            <div className="h-full flex flex-col bg-slate-900/20 border border-slate-800 rounded-xl relative overflow-hidden p-4 md:p-6">
+            <div className="h-[600px] flex flex-col bg-slate-900/20 border border-slate-800 rounded-xl relative overflow-hidden p-4 md:p-6">
+              {/* ... Parallel View keeps fixed height for grid ... */}
+              {/* Note: I need to preserve the Parallel View content if I replace the parent block, 
+                  but replace_file_content limits context. 
+                  Actually, I should just target the specific lines if possible.
+                  Let's target the wrapper div opening tag first. 
+              */}
 
               {/* Session Header */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -796,7 +805,7 @@ function App() {
 
             </div>
           ) : gameMode === GameMode.IDLE ? (
-            <div className="h-full flex flex-col items-center justify-center bg-slate-900/30 border border-slate-800 rounded-xl border-dashed p-6">
+            <div className="flex flex-col items-center justify-start pt-10 bg-slate-900/30 border border-slate-800 rounded-xl border-dashed p-6 pb-20">
               <div className="text-6xl mb-4 opacity-50 animate-bounce">⚪⚫</div>
               <h3 className="text-xl font-display text-slate-500 mb-6 tracking-widest">SYSTEM IDLE</h3>
 
@@ -831,16 +840,18 @@ function App() {
               <p className="text-slate-600 text-sm mt-2">Ready to initiate neural handshake.</p>
             </div>
           ) : (
-            <BattleArena
-              board={board}
-              validMoves={gameMode === GameMode.PVP && activeColor === 'Black' ? getValidMoves(board, 'Black') : []}
-              onMove={executeMove}
-              gameMode={gameMode}
-              isProcessing={isProcessing}
-              scores={countScore(board)}
-              activeColor={activeColor}
-              lastMove={lastMove}
-            />
+            <div className="bg-slate-900/20 border border-slate-800 rounded-xl relative overflow-hidden flex flex-col items-center justify-start p-4 md:pt-10 pb-10">
+              <BattleArena
+                board={board}
+                validMoves={gameMode === GameMode.PVP && activeColor === 'Black' ? getValidMoves(board, 'Black') : []}
+                onMove={executeMove}
+                gameMode={gameMode}
+                isProcessing={isProcessing}
+                scores={countScore(board)}
+                activeColor={activeColor}
+                lastMove={lastMove}
+              />
+            </div>
           )}
         </div>
 

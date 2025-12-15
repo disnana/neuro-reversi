@@ -38,7 +38,7 @@ export const BattleArena: React.FC<Props> = ({
   const opponentName = getOpponentName(gameMode);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full max-w-4xl mx-auto p-2 md:p-4 gap-4 md:gap-6">
+    <div className="flex flex-col items-center justify-center w-full max-w-xl mx-auto p-2 md:p-4 gap-3 md:gap-5">
 
       {/* Scoreboard */}
       <div className="flex justify-between items-center w-full max-w-2xl bg-slate-900/90 p-3 md:p-6 rounded-2xl border border-slate-700 shadow-2xl backdrop-blur-sm relative overflow-hidden">
@@ -70,7 +70,7 @@ export const BattleArena: React.FC<Props> = ({
       <div className="relative p-1 md:p-2 bg-slate-800 rounded-lg shadow-2xl border-2 md:border-4 border-slate-700">
         <div
           className="grid grid-cols-8 gap-[1px] md:gap-1 bg-slate-900 border border-slate-900 mx-auto"
-          style={{ width: 'min(90vw, 500px)', aspectRatio: '1 / 1', height: 'auto' }}
+          style={{ width: 'min(90vw, 450px)', aspectRatio: '1 / 1', height: 'auto' }}
         >
           {board.map((row, rIndex) => (
             row.map((cell, cIndex) => {
