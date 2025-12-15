@@ -1,5 +1,5 @@
 {
-  "name": "NeuroReversi: Gemini Mind v2.2 - beta",
+  "name": "NeuroReversi: Gemini Mind v2.2",
   "description": "Train a local AI agent to play Reversi against Gemini Flash Lite, then challenge it yourself. Features reinforcement learning via board state analysis and heatmap generation.",
   "requestFramePermissions": []
 }

@@ -54,6 +54,8 @@ export const getValidMoves = (board: Board, color: Disk): Coordinate[] => {
 };
 
 export const applyMove = (board: Board, color: Disk, row: number, col: number): Board => {
+  if (row < 0 || row >= BOARD_SIZE || col < 0 || col >= BOARD_SIZE) return board; // Bounds check
+
   const newBoard = board.map(r => [...r]);
   newBoard[row][col] = color;
 
